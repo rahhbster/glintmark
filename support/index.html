@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support — Glintmark</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #07090C; --surface: #0D1117; --elevated: #1C2333;
+  --border: rgba(255,255,255,0.08); --amber: #F59E0B;
+  --text: #F0EDE8; --muted: rgba(240,237,232,0.55);
+}
+body { background: var(--bg); color: var(--text); font-family: -apple-system, "SF Pro Text", sans-serif; font-size: 16px; line-height: 1.7; padding: 60px 20px 100px; }
+.container { max-width: 680px; margin: 0 auto; }
+.back { display: inline-flex; align-items: center; gap: 8px; color: var(--amber); font-size: 14px; margin-bottom: 48px; text-decoration: none; }
+.back svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.wordmark { font-size: 22px; font-weight: 700; color: var(--amber); margin-bottom: 48px; display: block; }
+h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+.subtitle { color: var(--muted); font-size: 15px; margin-bottom: 48px; }
+h2 { font-size: 18px; font-weight: 600; margin-top: 40px; margin-bottom: 12px; }
+p { color: var(--muted); margin-bottom: 16px; }
+.faq { border-top: 1px solid var(--border); margin-top: 48px; padding-top: 40px; }
+.faq-item { border-bottom: 1px solid var(--border); padding: 20px 0; }
+.faq-q { font-size: 16px; font-weight: 500; color: var(--text); margin-bottom: 10px; }
+.faq-a { font-size: 14px; color: var(--muted); line-height: 1.6; }
+.contact-box { background: #0D1117; border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin-top: 48px; }
+.contact-box h2 { margin-top: 0; }
+a { color: var(--amber); text-decoration: none; }
+a:hover { text-decoration: underline; }
+hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a href="../" class="back">
+    <svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg>
+    glintmark.app
+  </a>
+
+  <span class="wordmark">Glintmark</span>
+
+  <h1>Support</h1>
+  <p class="subtitle">We're here to help. Glintmark is in active development — your feedback shapes the app.</p>
+
+  <h2>Getting started</h2>
+  <p>Glintmark is not yet available on the App Store. It is currently in development. When it launches, you will be able to create quote cards, paste text from any source, apply a visual theme, and share to Instagram or anywhere else.</p>
+
+  <div class="faq">
+
+    <div class="faq-item">
+      <div class="faq-q">When will Glintmark be available?</div>
+      <div class="faq-a">We are targeting a TestFlight beta followed by an App Store release. We do not have a firm date. Follow <a href="https://glintmark.app">glintmark.app</a> for updates.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What is Paste &amp; Parse?</div>
+      <div class="faq-a">Copy any quote, verse, or passage, then tap "Paste &amp; Parse" in the editor. Glintmark uses AI to automatically extract the quote body, attribution, and source so you don't have to type them separately. This feature is optional and requires an OpenRouter API key in Settings.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Does Glintmark collect my data?</div>
+      <div class="faq-a">No. Cards are stored locally on your device and never uploaded to our servers. The only data that leaves your device is the text you paste when using Paste &amp; Parse — that text is sent to the AI parsing service. See our <a href="../privacy/">Privacy Policy</a> for full details.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Why does the app need an OpenRouter API key?</div>
+      <div class="faq-a">The AI quote parser calls the OpenRouter API to process text. Rather than billing you through the app, we let you use your own API key so you control usage and cost. You can get a free key at openrouter.ai. The Paste &amp; Parse feature works without a key — it falls back to a simpler local parser.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">My card looks different than expected. What happened?</div>
+      <div class="faq-a">Font size scales with the length of your quote and the card's aspect ratio — longer quotes use smaller type, portrait cards use larger type than square ones. Try shortening the quote text or switching aspect ratio. If you see a rendering bug, please contact us with a screenshot.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Can I use my own photos?</div>
+      <div class="faq-a">Yes. In the background panel, tap "Upload" to select a photo from your library. Glintmark will ask for read access to your Photos. The image is used locally only — it is never uploaded.</div>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="contact-box">
+    <h2>Contact</h2>
+    <p>Have a bug report, feature request, or question? Email us:</p>
+    <p><a href="mailto:support@glintmark.app">support@glintmark.app</a></p>
+    <p style="margin-top:16px;font-size:14px;color:var(--muted)">We read every message. Response time is typically 1–3 business days.</p>
+    <p style="margin-top:6px;font-size:14px">HZHLLC · <a href="https://glintmark.app">glintmark.app</a></p>
+  </div>
+
+</div>
+</body>
+</html>

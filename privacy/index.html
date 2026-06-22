@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Glintmark</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:      #0A0A0F;
+    --surface: #141420;
+    --border:  rgba(255,255,255,0.08);
+    --amber:   #F59E0B;
+    --text:    #F0EDE8;
+    --muted:   rgba(240,237,232,0.55);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Georgia, serif;
+    font-size: 16px;
+    line-height: 1.7;
+    padding: 60px 20px 100px;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .wordmark {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--amber);
+    margin-bottom: 48px;
+    display: block;
+  }
+
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .effective {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 48px;
+  }
+
+  h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  p { color: var(--muted); margin-bottom: 16px; }
+  p:last-child { margin-bottom: 0; }
+
+  ul {
+    color: var(--muted);
+    padding-left: 20px;
+    margin-bottom: 16px;
+  }
+  ul li { margin-bottom: 6px; }
+
+  .highlight {
+    background: rgba(245,158,11,0.08);
+    border-left: 3px solid var(--amber);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    color: var(--text);
+    font-size: 15px;
+  }
+
+  a { color: var(--amber); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  .contact-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 40px;
+  }
+  .contact-box h2 { margin-top: 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a href="../" style="display:inline-flex;align-items:center;gap:8px;color:#F59E0B;font-size:14px;margin-bottom:48px;text-decoration:none"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>glintmark.app</a>
+  <span class="wordmark">Glintmark</span>
+
+  <h1>Privacy Policy</h1>
+  <p class="effective">Effective date: June 22, 2026</p>
+
+  <div class="highlight">
+    The short version: Glintmark does not collect your personal information, does not track you, and does not sell data. Your cards live on your device.
+  </div>
+
+  <h2>Who we are</h2>
+  <p>Glintmark is an iOS app published by HZHLLC. It lets you create, save, and share quote cards.</p>
+
+  <h2>What data we collect</h2>
+  <p>We collect no personal information. Specifically:</p>
+  <ul>
+    <li><strong>No account or login.</strong> Glintmark requires no sign-up and stores no user profile anywhere.</li>
+    <li><strong>No analytics or tracking.</strong> We do not use analytics SDKs, crash reporters, or advertising identifiers.</li>
+    <li><strong>No location data.</strong> We never request location access.</li>
+    <li><strong>No contacts or calendar access.</strong></li>
+  </ul>
+
+  <h2>Where your cards are stored</h2>
+  <p>All cards you create — including text, background choices, and style settings — are stored locally on your device using iOS standard storage. They are never uploaded to a server or synchronized to any cloud service by Glintmark.</p>
+  <p>If you have iCloud Backup enabled in iOS Settings, your device backups (which may include Glintmark data) are governed by Apple's privacy policy, not ours.</p>
+
+  <h2>Photos and camera</h2>
+  <p>If you choose to use a photo from your library as a card background, Glintmark requests read access to your Photos library. This image is loaded directly onto your card and stored locally on your device. It is never uploaded anywhere.</p>
+  <p>You can revoke photo access at any time in iOS Settings → Privacy & Security → Photos.</p>
+
+  <h2>The AI quote parser (optional feature)</h2>
+  <p>Glintmark includes an optional "Paste & Parse" feature that uses an external AI service (<a href="https://openrouter.ai" target="_blank" rel="noopener">OpenRouter</a>) to extract quote text, attribution, and source from clipboard content you paste.</p>
+  <p>When you use this feature:</p>
+  <ul>
+    <li>The text you paste is sent to OpenRouter's API to be parsed.</li>
+    <li>No other information is sent — not your name, device ID, location, or any personal identifier.</li>
+    <li>OpenRouter's handling of API requests is governed by <a href="https://openrouter.ai/privacy" target="_blank" rel="noopener">their privacy policy</a>.</li>
+    <li>This feature requires you to provide your own OpenRouter API key in Settings. We never see or store your API key on our servers.</li>
+  </ul>
+  <p>If you prefer not to use this feature, you can type your quotes manually. The parser is never invoked automatically.</p>
+
+  <h2>Card sharing and export</h2>
+  <p>When you export or share a card, Glintmark renders it as an image file and hands it to iOS's standard share sheet. Where that image goes — whether to Instagram, Messages, Photos, or anywhere else — is your choice and governed by those platforms' policies, not ours.</p>
+
+  <h2>Third-party services</h2>
+  <p>Beyond the optional AI parser described above, Glintmark does not integrate any third-party analytics, advertising, or data collection services.</p>
+  <p>Background photos in the app are loaded from <a href="https://picsum.photos" target="_blank" rel="noopener">picsum.photos</a>, a free image service. When the app loads a background photo, your device makes a standard network request to their servers. We do not control or have access to their server logs.</p>
+
+  <h2>Children's privacy</h2>
+  <p>Glintmark does not knowingly collect any information from children under 13. If you believe a child has provided personal information through the app, please contact us and we will address it promptly.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>If we materially change this privacy policy, we will update the effective date at the top of this page. For significant changes, we will note them in the App Store release notes.</p>
+
+  <hr>
+
+  <div class="contact-box">
+    <h2>Contact</h2>
+    <p>Questions about this policy? Reach us at:</p>
+    <p><a href="mailto:privacy@glintmark.app">privacy@glintmark.app</a></p>
+    <p style="margin-top:12px;font-size:14px">HZHLLC · glintmark.app</p>
+  </div>
+
+</div>
+</body>
+</html>
