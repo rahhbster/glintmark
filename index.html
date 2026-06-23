@@ -3,827 +3,579 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Glintmark — Mark what moves you</title>
-<meta name="description" content="Beautiful quote cards for sharing the thoughts that last. Create, style, and share meaningful reflections — coming soon to the App Store.">
+<title>Glintmark — Carry the light with you</title>
+<meta name="description" content="Turn the verses and words that move you into cards worth keeping. Beautiful quote cards for iPhone — coming soon to the App Store.">
 <meta property="og:title" content="Glintmark">
-<meta property="og:description" content="Beautiful quote cards for sharing the thoughts that last.">
+<meta property="og:description" content="Turn the verses and words that move you into cards worth keeping.">
 <meta property="og:url" content="https://glintmark.app">
 <meta name="theme-color" content="#07090C">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: #07090C;
+    font-family: -apple-system, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: #F0F4F8;
+    overflow-x: hidden;
+  }
+  ::selection { background: rgba(245,158,11,.3); color: #FFF8E7; }
+  a { text-decoration: none; color: inherit; }
 
-:root {
-  --bg:      #07090C;
-  --surface: #0D1117;
-  --raised:  #1C2333;
-  --border:  rgba(255,255,255,0.07);
-  --amber:   #F59E0B;
-  --gold:    #FFD700;
-  --text:    #F0F4F8;
-  --muted:   #8A9BB0;
-  --cream:   #FFF8E7;
-}
+  @keyframes gmFloat {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-14px); }
+  }
+  @keyframes gmPulse {
+    0%, 100% { box-shadow: 0 8px 24px rgba(245,158,11,.42), 0 2px 8px rgba(0,0,0,.4); }
+    50%       { box-shadow: 0 8px 34px rgba(245,158,11,.62), 0 2px 8px rgba(0,0,0,.4); }
+  }
 
-html { scroll-behavior: smooth; }
+  .gm-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s cubic-bezier(.16,.84,.44,1), transform 1s cubic-bezier(.16,.84,.44,1);
+  }
+  .gm-reveal.in { opacity: 1; transform: none; }
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: -apple-system, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
+  .gm-as { transition: transform .25s, box-shadow .25s; }
+  .gm-as:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,.45); }
+  .gm-ghost:hover { border-color: rgba(245,158,11,.7) !important; color: #FFD700 !important; }
+  .gm-nav-link:hover { color: #FFD700 !important; }
+  .gm-theme { transition: transform .4s; }
+  .gm-theme:hover { transform: translateY(-6px); }
 
-a { color: inherit; text-decoration: none; }
+  /* ── NAV ── */
+  #nav {
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    background: rgba(7,9,12,.72);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 17px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; }
+  .nav-diamond {
+    width: 22px; height: 22px; background: #F59E0B;
+    border-radius: 6px; transform: rotate(45deg);
+    box-shadow: 0 0 20px rgba(245,158,11,.55);
+    flex-shrink: 0;
+  }
+  .nav-name {
+    font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+    color: #FFF8E7; font-weight: 700;
+  }
+  .nav-right { display: flex; align-items: center; gap: 38px; }
+  .nav-right a { font-size: 14px; color: #B7BECB; transition: color .25s; letter-spacing: .2px; }
+  .nav-cta {
+    display: flex; align-items: center; gap: 9px;
+    background: #F59E0B; color: #1A1206;
+    padding: 10px 19px; border-radius: 30px;
+    font-size: 13.5px; font-weight: 700; letter-spacing: .2px;
+  }
 
-/* ── NAV ── */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 40px;
-  background: rgba(7,9,12,0.82);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-}
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    background:
+      radial-gradient(1200px 680px at 78% -6%, rgba(245,158,11,.10), transparent 58%),
+      radial-gradient(900px 600px at 10% 30%, rgba(245,158,11,.05), transparent 60%),
+      #07090C;
+  }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 96px 32px 110px;
+    display: grid; grid-template-columns: 1fr 408px;
+    gap: 64px; align-items: center;
+  }
+  .hero-label {
+    font-family: "Courier New", monospace;
+    font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
+    color: #F59E0B; margin-bottom: 26px;
+  }
+  .hero-h1 {
+    font-family: Georgia, serif;
+    font-size: 72px; line-height: 1.04;
+    letter-spacing: -1.5px; color: #FFF8E7;
+  }
+  .hero-sub {
+    font-family: Georgia, serif;
+    font-size: 20px; line-height: 1.6;
+    color: #B7BECB; margin-top: 26px; max-width: 468px;
+  }
+  .hero-actions { display: flex; align-items: center; gap: 16px; margin-top: 40px; }
+  .btn-store {
+    display: flex; align-items: center; gap: 11px;
+    background: #000; border: 1px solid rgba(255,255,255,.14);
+    color: #fff; padding: 13px 22px; border-radius: 13px;
+  }
+  .btn-store-text { text-align: left; line-height: 1.1; }
+  .btn-store-text small { font-size: 9px; letter-spacing: .5px; color: #B7BECB; display: block; }
+  .btn-store-text strong { font-size: 17px; font-weight: 600; letter-spacing: .2px; }
+  .btn-ghost {
+    padding: 14px 24px; border-radius: 13px;
+    border: 1px solid rgba(255,255,255,.16);
+    color: #F0F4F8; font-size: 15px; font-weight: 500;
+    transition: color .25s, border-color .25s;
+  }
+  .hero-social-proof { display: flex; align-items: center; gap: 8px; margin-top: 30px; }
+  .stars { display: flex; gap: 2px; }
+  .stars span { color: #F59E0B; font-size: 15px; }
+  .hero-social-proof p { font-size: 13.5px; color: #8A9BB0; }
 
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+  /* ── PHONE MOCKUP ── */
+  .phone-float { animation: gmFloat 7s ease-in-out infinite; justify-self: center; }
+  .phone-shell {
+    position: relative; width: 390px;
+    background: #0b0d12; border-radius: 48px; padding: 11px;
+    box-shadow: 0 50px 110px rgba(0,0,0,.7),
+                0 0 0 1px rgba(255,255,255,.05),
+                inset 0 0 0 2px rgba(255,255,255,.03);
+  }
+  .phone-screen {
+    position: relative; width: 368px; height: 780px;
+    background: #0D1117; border-radius: 38px;
+    overflow: hidden; display: flex; flex-direction: column;
+  }
 
-.nav-diamond {
-  width: 20px;
-  height: 20px;
-  background: var(--amber);
-  border-radius: 5px;
-  transform: rotate(45deg);
-  box-shadow: 0 0 18px rgba(245,158,11,0.5);
-  flex-shrink: 0;
-}
+  /* ── HOW IT WORKS ── */
+  #how { max-width: 1200px; margin: 0 auto; padding: 104px 32px; }
+  .section-label {
+    font-family: "Courier New", monospace;
+    font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
+    color: #F59E0B; margin-bottom: 18px;
+  }
+  .section-h2 {
+    font-family: Georgia, serif;
+    font-size: 44px; line-height: 1.12;
+    letter-spacing: -.8px; color: #FFF8E7;
+  }
+  .how-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 28px; margin-top: 64px;
+  }
+  .how-card {
+    background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 18px; padding: 38px 32px;
+  }
+  .how-num { font-family: Georgia, serif; font-size: 15px; color: #F59E0B; letter-spacing: 1px; }
+  .how-card h3 { font-size: 22px; font-weight: 600; color: #FFF8E7; margin-top: 18px; letter-spacing: -.3px; }
+  .how-card p { font-size: 15.5px; line-height: 1.62; color: #8A9BB0; margin-top: 12px; }
 
-.nav-name {
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
-  color: var(--text);
-}
+  /* ── THEMES ── */
+  #themes {
+    background:
+      radial-gradient(900px 500px at 50% 0%, rgba(245,158,11,.06), transparent 60%),
+      #0A0D12;
+    border-top: 1px solid rgba(255,255,255,.05);
+    border-bottom: 1px solid rgba(255,255,255,.05);
+  }
+  .themes-inner { max-width: 1200px; margin: 0 auto; padding: 104px 32px; }
+  .themes-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 22px; margin-top: 60px;
+  }
+  .theme-card-img { position: relative; aspect-ratio: 1; overflow: hidden; border-radius: 14px; box-shadow: 0 18px 40px rgba(0,0,0,.5); }
+  .theme-name { font-family: Georgia, serif; font-size: 17px; color: #FFF8E7; margin-top: 16px; }
+  .theme-desc { font-size: 13px; color: #8A9BB0; margin-top: 3px; }
 
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
+  /* ── CREAM SECTION ── */
+  #quotes { background: #E9E6E0; }
+  .quotes-inner { max-width: 1200px; margin: 0 auto; padding: 104px 32px; }
+  .quotes-label {
+    font-family: "Courier New", monospace;
+    font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
+    color: #B07A1E; margin-bottom: 16px;
+  }
+  .quotes-h2 {
+    font-family: Georgia, serif;
+    font-size: 46px; line-height: 1.1;
+    letter-spacing: -.8px; color: #1A1814; max-width: 680px;
+  }
+  .quotes-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; margin-top: 54px;
+  }
+  .quote-card {
+    background: #fff; border-radius: 16px;
+    padding: 34px 30px; box-shadow: 0 2px 14px rgba(26,24,20,.07);
+  }
+  .quote-glyph {
+    font-family: Georgia, serif; font-size: 60px;
+    line-height: .6; color: #E0C089; height: 30px;
+  }
+  .quote-text { font-family: Georgia, serif; font-size: 21px; line-height: 1.48; color: #1A1814; margin-top: 10px; }
+  .quote-attrib { font-family: Georgia, serif; font-style: italic; font-size: 15px; color: #8C857A; margin-top: 18px; }
 
-.nav-links a {
-  font-size: 14px;
-  color: var(--muted);
-  transition: color 0.15s;
-}
-.nav-links a:hover { color: var(--text); }
+  /* ── DOWNLOAD CTA ── */
+  #download {
+    position: relative;
+    background:
+      radial-gradient(900px 600px at 50% 120%, rgba(245,158,11,.13), transparent 62%),
+      #07090C;
+    border-top: 1px solid rgba(255,255,255,.05);
+  }
+  .cta-inner {
+    max-width: 860px; margin: 0 auto;
+    padding: 118px 32px; text-align: center;
+  }
+  .cta-diamond {
+    width: 30px; height: 30px; background: #F59E0B;
+    border-radius: 8px; transform: rotate(45deg);
+    box-shadow: 0 0 34px rgba(245,158,11,.6);
+    margin: 0 auto 34px;
+  }
+  .cta-h2 {
+    font-family: Georgia, serif;
+    font-size: 56px; line-height: 1.08;
+    letter-spacing: -1.2px; color: #FFF8E7;
+  }
+  .cta-sub {
+    font-family: Georgia, serif;
+    font-size: 20px; line-height: 1.6;
+    color: #B7BECB; margin-top: 22px;
+    max-width: 520px; margin-left: auto; margin-right: auto;
+  }
+  .cta-btn-wrap { display: flex; justify-content: center; margin-top: 38px; }
+  .btn-store-lg {
+    display: flex; align-items: center; gap: 12px;
+    background: #000; border: 1px solid rgba(255,255,255,.14);
+    color: #fff; padding: 15px 26px; border-radius: 14px;
+  }
+  .btn-store-lg small { font-size: 10px; letter-spacing: .5px; color: #B7BECB; display: block; }
+  .btn-store-lg strong { font-size: 19px; font-weight: 600; letter-spacing: .2px; }
 
-/* ── HERO ── */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 120px 24px 80px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
+  /* ── FOOTER ── */
+  #footer {
+    background: #05070A;
+    border-top: 1px solid rgba(255,255,255,.06);
+  }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 54px 32px;
+    display: flex; align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; gap: 24px;
+  }
+  .footer-logo { display: flex; align-items: center; gap: 12px; }
+  .footer-diamond {
+    width: 20px; height: 20px; background: #F59E0B;
+    border-radius: 6px; transform: rotate(45deg);
+    box-shadow: 0 0 16px rgba(245,158,11,.5);
+  }
+  .footer-name { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #FFF8E7; font-weight: 700; }
+  .footer-links { display: flex; align-items: center; gap: 32px; }
+  .footer-links a { font-size: 13.5px; color: #8A9BB0; transition: color .25s; }
+  .footer-copy { font-size: 13px; color: #5A6473; }
 
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -200px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1000px;
-  height: 600px;
-  background: radial-gradient(ellipse, rgba(245,158,11,0.08) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.hero-label {
-  font-family: "Courier New", monospace;
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--amber);
-  margin-bottom: 22px;
-}
-
-.hero-headline {
-  font-size: clamp(48px, 8vw, 84px);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-  color: var(--text);
-  max-width: 780px;
-  margin-bottom: 22px;
-}
-
-.hero-headline em {
-  font-style: normal;
-  color: var(--amber);
-}
-
-.hero-sub {
-  font-size: clamp(16px, 2.5vw, 19px);
-  color: var(--muted);
-  max-width: 520px;
-  line-height: 1.6;
-  margin-bottom: 44px;
-}
-
-.app-store-soon {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  background: rgba(245,158,11,0.10);
-  border: 1px solid rgba(245,158,11,0.28);
-  border-radius: 14px;
-  padding: 13px 22px;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--amber);
-  letter-spacing: 0.01em;
-}
-
-.app-store-soon svg {
-  opacity: 0.8;
-}
-
-/* ── PHONE MOCKUP ── */
-.mockup-section {
-  padding: 80px 24px 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  overflow: hidden;
-}
-
-.mockup-row {
-  display: flex;
-  gap: 40px;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
-.mockup-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-}
-
-.mockup-caption {
-  font-family: "Courier New", monospace;
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-/* iPhone shell — scaled down for web */
-.phone {
-  position: relative;
-  width: 260px;
-  background: #0b0d12;
-  border-radius: 36px;
-  padding: 8px;
-  box-shadow: 0 40px 80px rgba(0,0,0,0.65),
-              0 0 0 1px rgba(255,255,255,0.06),
-              inset 0 0 0 2px rgba(255,255,255,0.03);
-}
-
-.phone-screen {
-  position: relative;
-  width: 244px;
-  border-radius: 28px;
-  overflow: hidden;
-  background: #0D1117;
-}
-
-/* ── FEATURES ── */
-.features {
-  padding: 80px 24px 100px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.section-label {
-  font-family: "Courier New", monospace;
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--amber);
-  text-align: center;
-  margin-bottom: 14px;
-}
-
-.section-title {
-  font-size: clamp(28px, 4vw, 42px);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  text-align: center;
-  margin-bottom: 60px;
-  color: var(--text);
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-.feature {
-  background: var(--surface);
-  padding: 36px 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.feature-icon {
-  width: 44px;
-  height: 44px;
-  background: rgba(245,158,11,0.12);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.feature-icon svg {
-  width: 22px;
-  height: 22px;
-  stroke: var(--amber);
-  fill: none;
-  stroke-width: 1.7;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.feature h3 {
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--text);
-  letter-spacing: -0.01em;
-}
-
-.feature p {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-/* ── THEMES SHOWCASE ── */
-.themes {
-  padding: 80px 24px 100px;
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.themes-inner {
-  max-width: 1160px;
-  margin: 0 auto;
-}
-
-.themes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 24px;
-  margin-top: 0;
-}
-
-.theme-card {
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
-  aspect-ratio: 1;
-  position: relative;
-}
-
-.theme-label-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  margin-bottom: 20px;
-}
-
-.theme-name {
-  font-family: Georgia, serif;
-  font-size: 18px;
-  color: var(--text);
-}
-
-.theme-desc {
-  font-family: "Courier New", monospace;
-  font-size: 10px;
-  letter-spacing: 1px;
-  color: var(--muted);
-}
-
-/* ── NOTIFY ── */
-.notify-section {
-  padding: 100px 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 24px;
-  position: relative;
-}
-
-.notify-section::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 600px;
-  height: 300px;
-  background: radial-gradient(ellipse, rgba(245,158,11,0.06) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.notify-section h2 {
-  font-size: clamp(26px, 4vw, 38px);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  max-width: 560px;
-}
-
-.notify-section p {
-  color: var(--muted);
-  font-size: 16px;
-  max-width: 420px;
-  line-height: 1.6;
-}
-
-.notify-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  padding: 10px 20px;
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.notify-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--amber);
-  box-shadow: 0 0 8px rgba(245,158,11,0.7);
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-
-/* ── FOOTER ── */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 32px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: gap;
-  gap: 16px;
-}
-
-.footer-logo {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-
-.footer-diamond {
-  width: 14px;
-  height: 14px;
-  background: var(--amber);
-  border-radius: 3px;
-  transform: rotate(45deg);
-  opacity: 0.7;
-}
-
-.footer-brand {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--muted);
-}
-
-.footer-links {
-  display: flex;
-  gap: 24px;
-}
-
-.footer-links a {
-  font-size: 13px;
-  color: var(--muted);
-  transition: color 0.15s;
-}
-.footer-links a:hover { color: var(--text); }
-
-.footer-copy {
-  font-size: 12px;
-  color: rgba(138,155,176,0.5);
-}
-
-/* ── RESPONSIVE ── */
-@media (max-width: 700px) {
-  nav { padding: 14px 20px; }
-  .nav-links { gap: 20px; }
-  footer { flex-direction: column; text-align: center; }
-  .phone { width: 220px; }
-  .phone-screen { width: 204px; }
-}
-
-@media (max-width: 480px) {
-  .nav-links .hide-mobile { display: none; }
-}
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; text-align: center; }
+    .hero-sub { margin-left: auto; margin-right: auto; }
+    .hero-actions { justify-content: center; }
+    .hero-social-proof { justify-content: center; }
+    .phone-float { display: none; }
+    .how-grid { grid-template-columns: 1fr; }
+    .themes-grid { grid-template-columns: repeat(2, 1fr); }
+    .quotes-grid { grid-template-columns: 1fr; }
+    .hero-h1 { font-size: 52px; }
+  }
+  @media (max-width: 600px) {
+    .nav-right .hide-sm { display: none; }
+    .themes-grid { grid-template-columns: 1fr 1fr; }
+    .cta-h2 { font-size: 38px; }
+    .nav-cta { display: none; }
+  }
 </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
-<nav>
-  <div class="nav-logo">
-    <div class="nav-diamond"></div>
-    <span class="nav-name">Glintmark</span>
+<!-- NAV -->
+<div id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <div class="nav-diamond"></div>
+      <span class="nav-name">Glintmark</span>
+    </a>
+    <div class="nav-right">
+      <a href="#how" class="gm-nav-link hide-sm">Features</a>
+      <a href="support/" class="gm-nav-link hide-sm">Support</a>
+      <a href="privacy/" class="gm-nav-link hide-sm">Privacy</a>
+      <a href="#download" class="nav-cta gm-as">
+        <svg width="14" height="16" viewBox="0 0 17 20" fill="#1A1206"><path d="M14.1 10.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.9-.8-3.1-.8-1.6 0-3 .9-3.8 2.4-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.4-1-2.4-3.7zM11.8 3.8c.6-.8 1.1-1.9.9-3-1 0-2.1.6-2.8 1.4-.6.7-1.1 1.8-1 2.9 1.1.1 2.2-.5 2.9-1.3z"/></svg>
+        Get the app
+      </a>
+    </div>
   </div>
-  <div class="nav-links">
-    <a href="#features" class="hide-mobile">Features</a>
-    <a href="#themes" class="hide-mobile">Themes</a>
-    <a href="support/">Support</a>
-    <a href="privacy/">Privacy</a>
-  </div>
-</nav>
+</div>
 
-<!-- ── HERO ── -->
-<section class="hero">
-  <div class="hero-label">iOS App · Coming Soon</div>
-  <h1 class="hero-headline">Mark what <em>moves</em> you.</h1>
-  <p class="hero-sub">Beautiful quote cards for sharing the thoughts that last. Capture scripture, reflections, and wisdom — then share them anywhere.</p>
-  <div class="app-store-soon">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-    </svg>
-    Coming soon to the App Store
-  </div>
-</section>
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-inner">
 
-<!-- ── MOCKUPS ── -->
-<section class="mockup-section">
-  <div class="mockup-row">
+    <div class="gm-reveal">
+      <div class="hero-label">Scripture · Quotes · Reflections</div>
+      <h1 class="hero-h1">Carry the light<br>with you.</h1>
+      <p class="hero-sub">Turn the verses and words that move you into cards worth keeping. Set them, share them, return to them — a quiet place for the lines that light your way.</p>
+      <div class="hero-actions">
+        <a href="#download" class="btn-store gm-as">
+          <svg width="20" height="23" viewBox="0 0 17 20" fill="#fff"><path d="M14.1 10.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.9-.8-3.1-.8-1.6 0-3 .9-3.8 2.4-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.4-1-2.4-3.7zM11.8 3.8c.6-.8 1.1-1.9.9-3-1 0-2.1.6-2.8 1.4-.6.7-1.1 1.8-1 2.9 1.1.1 2.2-.5 2.9-1.3z"/></svg>
+          <div class="btn-store-text">
+            <small>Download on the</small>
+            <strong>App Store</strong>
+          </div>
+        </a>
+        <a href="#how" class="btn-ghost gm-ghost">See features</a>
+      </div>
+      <div class="hero-social-proof">
+        <div class="stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <p>Loved by readers, students &amp; the faithful</p>
+      </div>
+    </div>
 
-    <!-- Library screen -->
-    <div class="mockup-wrap">
-      <div class="phone">
-        <div class="phone-screen" style="height:534px;">
-
+    <!-- floating phone -->
+    <div class="phone-float gm-reveal">
+      <div class="phone-shell">
+        <div class="phone-screen">
           <!-- status bar -->
-          <div style="height:36px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 20px 6px;position:relative;z-index:6">
-            <span style="font-size:10px;font-weight:600;color:#F0F4F8">9:41</span>
-            <div style="position:absolute;top:6px;left:50%;transform:translateX(-50%);width:78px;height:22px;background:#000;border-radius:13px"></div>
-            <div style="display:flex;align-items:center;gap:5px">
-              <svg width="12" height="8" viewBox="0 0 18 12" fill="#F0F4F8"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
-              <svg width="18" height="8" viewBox="0 0 27 13" fill="none"><rect x="0.5" y="0.5" width="22" height="12" rx="3.5" stroke="#F0F4F8" stroke-opacity="0.45"/><rect x="2" y="2" width="18" height="9" rx="2" fill="#F0F4F8"/><path d="M24.5 4.5c1 0 1.5.6 1.5 2s-.5 2-1.5 2z" fill="#F0F4F8" fill-opacity="0.5"/></svg>
+          <div style="height:54px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 28px 9px;flex-shrink:0;position:relative;z-index:6">
+            <span style="font-size:15px;font-weight:600;color:#F0F4F8;letter-spacing:.3px">9:41</span>
+            <div style="position:absolute;top:9px;left:50%;transform:translateX(-50%);width:116px;height:33px;background:#000;border-radius:19px"></div>
+            <div style="display:flex;align-items:center;gap:7px">
+              <svg width="18" height="12" viewBox="0 0 18 12" fill="#F0F4F8"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+              <svg width="26" height="13" viewBox="0 0 27 13" fill="none"><rect x="0.5" y="0.5" width="22" height="12" rx="3.5" stroke="#F0F4F8" stroke-opacity="0.45"/><rect x="2" y="2" width="18" height="9" rx="2" fill="#F0F4F8"/><path d="M24.5 4.5c1 0 1.5.6 1.5 2s-.5 2-1.5 2z" fill="#F0F4F8" fill-opacity="0.5"/></svg>
             </div>
           </div>
-
           <!-- header -->
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 14px 10px">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 20px 14px;flex-shrink:0">
             <div>
-              <div style="font-size:22px;font-weight:700;color:#F0F4F8;letter-spacing:-.5px">Glintmark</div>
-              <div style="font-size:9px;color:#8A9BB0;margin-top:2px">24 cards · marked</div>
+              <div style="font-size:32px;font-weight:700;color:#F0F4F8;letter-spacing:-.8px;line-height:1">Glintmark</div>
+              <div style="font-size:13px;color:#8A9BB0;margin-top:3px">24 cards · marked</div>
             </div>
-            <div style="width:26px;height:26px;border-radius:50%;background:#1C2333;display:flex;align-items:center;justify-content:center">
-              <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="#8A9BB0" stroke-width="1.7" stroke-linecap="round"><path d="M3 6h14M3 10h14M3 14h14"/></svg>
+            <div style="width:38px;height:38px;border-radius:50%;background:#1C2333;display:flex;align-items:center;justify-content:center">
+              <svg width="19" height="19" viewBox="0 0 20 20" fill="none" stroke="#8A9BB0" stroke-width="1.7" stroke-linecap="round"><path d="M3 6h14M3 10h14M3 14h14"/></svg>
             </div>
           </div>
-
-          <!-- card grid -->
-          <div style="padding:2px 10px 0;overflow:hidden;height:445px">
-            <div style="column-count:2;column-gap:8px">
-
-              <div style="break-inside:avoid;margin-bottom:8px;border-radius:9px;overflow:hidden;position:relative;min-height:144px;display:flex;flex-direction:column;justify-content:center;padding:14px 11px;background:linear-gradient(150deg,#2C1654,#C06C84)">
+          <!-- masonry cards -->
+          <div style="flex:1;overflow:hidden;padding:2px 16px 0">
+            <div style="column-count:2;column-gap:12px">
+              <div style="break-inside:avoid;margin-bottom:12px;border-radius:12px;overflow:hidden;position:relative;min-height:216px;display:flex;flex-direction:column;justify-content:center;padding:20px 16px;background:linear-gradient(150deg,#2C1654,#C06C84)">
                 <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.42))"></div>
                 <div style="position:relative;z-index:1;text-align:center">
-                  <div style="font-family:Palatino,serif;font-size:6px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,248,231,.7);margin-bottom:6px">Nun</div>
-                  <div style="font-family:Palatino,serif;font-size:10.5px;line-height:1.5;color:#FFF8E7">Thy word is a lamp unto my feet.</div>
-                  <div style="font-family:Palatino,serif;font-size:7px;color:rgba(255,248,231,.72);margin-top:7px">Psalm 119:105</div>
+                  <div style="font-family:Palatino,serif;font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,248,231,.7);margin-bottom:9px">נ&nbsp;&nbsp;Nun</div>
+                  <div style="font-family:Palatino,serif;font-size:15.5px;line-height:1.5;color:#FFF8E7">Thy word is a lamp unto my feet, and a light unto my path.</div>
+                  <div style="font-family:Palatino,serif;font-size:10px;color:rgba(255,248,231,.72);margin-top:11px">Psalm 119:105</div>
                 </div>
               </div>
-
-              <div style="break-inside:avoid;margin-bottom:8px;border-radius:9px;overflow:hidden;position:relative;min-height:98px;display:flex;flex-direction:column;justify-content:flex-end;padding:11px 9px;background:linear-gradient(150deg,#2C3E50,#4CA1AF)">
+              <div style="break-inside:avoid;margin-bottom:12px;border-radius:12px;overflow:hidden;position:relative;min-height:148px;display:flex;flex-direction:column;justify-content:flex-end;padding:16px 14px;background:linear-gradient(150deg,#2C3E50,#4CA1AF)">
                 <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.5))"></div>
                 <div style="position:relative;z-index:1;text-align:center">
-                  <div style="font-family:Georgia,serif;font-size:10px;line-height:1.4;color:#FFD700">The Lord is my light and my salvation.</div>
-                  <div style="font-family:Georgia,serif;font-size:6.5px;color:rgba(255,215,0,.72);margin-top:6px">Psalm 27:1</div>
+                  <div style="font-family:Georgia,serif;font-size:15px;line-height:1.45;color:#FFD700">The Lord is my light and my salvation.</div>
+                  <div style="font-family:Georgia,serif;font-size:9.5px;color:rgba(255,215,0,.72);margin-top:9px">Psalm 27:1</div>
                 </div>
               </div>
-
-              <div style="break-inside:avoid;margin-bottom:8px;border-radius:9px;overflow:hidden;position:relative;min-height:126px;display:flex;flex-direction:column;justify-content:center;padding:12px 11px;background:linear-gradient(150deg,#2C3E50,#3498DB)">
+              <div style="break-inside:avoid;margin-bottom:12px;border-radius:12px;overflow:hidden;position:relative;min-height:188px;display:flex;flex-direction:column;justify-content:center;padding:18px 16px;background:linear-gradient(150deg,#2C3E50,#3498DB)">
                 <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.4))"></div>
-                <div style="position:relative;z-index:1">
-                  <div style="font-size:10px;line-height:1.5;color:#FFF;font-weight:500">You have power over your mind — not outside events.</div>
-                  <div style="font-size:7px;color:rgba(255,255,255,.7);margin-top:7px">Marcus Aurelius</div>
+                <div style="position:relative;z-index:1;text-align:left">
+                  <div style="font-size:15px;line-height:1.5;color:#FFF;font-weight:500">You have power over your mind — not outside events.</div>
+                  <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:11px">Marcus Aurelius</div>
                 </div>
               </div>
-
-              <div style="break-inside:avoid;margin-bottom:8px;border-radius:9px;overflow:hidden;position:relative;min-height:92px;display:flex;flex-direction:column;justify-content:flex-end;padding:10px 9px;background:linear-gradient(150deg,#B8860B,#FFD700)">
+              <div style="break-inside:avoid;margin-bottom:12px;border-radius:12px;overflow:hidden;position:relative;min-height:138px;display:flex;flex-direction:column;justify-content:flex-end;padding:16px 14px;background:linear-gradient(150deg,#B8860B,#FFD700)">
                 <div style="position:relative;z-index:1;text-align:center">
-                  <div style="font-family:Georgia,serif;font-size:9.5px;line-height:1.45;color:#000;font-style:italic">Let your light so shine before men.</div>
-                  <div style="font-family:Georgia,serif;font-size:6.5px;color:rgba(0,0,0,.6);margin-top:5px">Matthew 5:16</div>
+                  <div style="font-family:Georgia,serif;font-size:14px;line-height:1.45;color:#000;font-style:italic">Let your light so shine before men.</div>
+                  <div style="font-family:Georgia,serif;font-size:9.5px;color:rgba(0,0,0,.6);margin-top:8px">Matthew 5:16</div>
                 </div>
               </div>
-
-              <div style="break-inside:avoid;margin-bottom:8px;border-radius:9px;overflow:hidden;position:relative;min-height:122px;display:flex;flex-direction:column;justify-content:flex-end;padding:11px 9px;background:linear-gradient(150deg,#1A3C34,#56AB2F)">
-                <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.44))"></div>
-                <div style="position:relative;z-index:1;text-align:center">
-                  <div style="font-family:Palatino,serif;font-size:10px;line-height:1.5;color:#FFF8E7">The glory of God is intelligence — light and truth.</div>
-                  <div style="font-family:Palatino,serif;font-size:6.5px;color:rgba(255,248,231,.72);margin-top:7px">D&amp;C 93:36</div>
-                </div>
-              </div>
-
-              <div style="break-inside:avoid;margin-bottom:8px;border-radius:9px;overflow:hidden;position:relative;min-height:110px;display:flex;flex-direction:column;justify-content:center;padding:12px 9px;background:linear-gradient(150deg,#1A6B8A,#4ECDC4)">
+              <div style="break-inside:avoid;margin-bottom:12px;border-radius:12px;overflow:hidden;position:relative;min-height:166px;display:flex;flex-direction:column;justify-content:center;padding:18px 14px;background:linear-gradient(150deg,#1A6B8A,#4ECDC4)">
                 <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.4))"></div>
                 <div style="position:relative;z-index:1;text-align:center">
-                  <div style="font-size:12.5px;line-height:1.3;color:#FFF;font-weight:700">I am the light of the world.</div>
-                  <div style="font-size:7px;color:rgba(255,255,255,.78);margin-top:6px">John 8:12</div>
+                  <div style="font-size:19px;line-height:1.3;color:#FFF;font-weight:700;letter-spacing:-.3px">I am the light of the world.</div>
+                  <div style="font-size:10px;color:rgba(255,255,255,.78);margin-top:10px">John 8:12</div>
                 </div>
               </div>
-
             </div>
           </div>
-
           <!-- FAB -->
-          <div style="position:absolute;right:14px;bottom:24px;width:40px;height:40px;border-radius:50%;background:#F59E0B;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(245,158,11,.55);z-index:8">
-            <svg width="18" height="18" viewBox="0 0 26 26" fill="none" stroke="#1A1206" stroke-width="2.6" stroke-linecap="round"><path d="M13 5v16M5 13h16"/></svg>
+          <div style="position:absolute;right:20px;bottom:30px;width:60px;height:60px;border-radius:50%;background:#F59E0B;display:flex;align-items:center;justify-content:center;animation:gmPulse 3s ease-in-out infinite;z-index:8">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="#1A1206" stroke-width="2.6" stroke-linecap="round"><path d="M13 5v16M5 13h16"/></svg>
           </div>
-
-          <!-- home indicator -->
-          <div style="position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:90px;height:4px;border-radius:2px;background:rgba(240,244,248,.25);z-index:7"></div>
-
         </div>
       </div>
-      <div class="mockup-caption">Library</div>
-    </div>
-
-    <!-- Editor screen -->
-    <div class="mockup-wrap" style="margin-top: 40px;">
-      <div class="phone">
-        <div class="phone-screen" style="height:534px;">
-
-          <div style="height:36px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 20px 6px;position:relative;z-index:6">
-            <span style="font-size:10px;font-weight:600;color:#F0F4F8">9:41</span>
-            <div style="position:absolute;top:6px;left:50%;transform:translateX(-50%);width:78px;height:22px;background:#000;border-radius:13px"></div>
-            <div style="display:flex;align-items:center;gap:5px">
-              <svg width="12" height="8" viewBox="0 0 18 12" fill="#F0F4F8"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
-              <svg width="18" height="8" viewBox="0 0 27 13" fill="none"><rect x="0.5" y="0.5" width="22" height="12" rx="3.5" stroke="#F0F4F8" stroke-opacity="0.45"/><rect x="2" y="2" width="18" height="9" rx="2" fill="#F0F4F8"/><path d="M24.5 4.5c1 0 1.5.6 1.5 2s-.5 2-1.5 2z" fill="#F0F4F8" fill-opacity="0.5"/></svg>
-            </div>
-          </div>
-
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:2px 14px 8px">
-            <div style="width:24px;height:24px;border-radius:50%;background:#1C2333;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="#8A9BB0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg></div>
-            <div style="font-size:9px;font-weight:600;color:#8A9BB0;letter-spacing:.3px">Edit Card</div>
-            <div style="font-size:11px;font-weight:600;color:#F59E0B">Done</div>
-          </div>
-
-          <!-- card preview -->
-          <div style="padding:0 10px;flex-shrink:0">
-            <div style="position:relative;width:100%;height:134px;border-radius:10px;overflow:hidden;background:linear-gradient(150deg,#2B3344,#1D2533);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,.5)">
-              <!-- stars -->
-              <div style="position:absolute;top:12px;left:20px;width:3px;height:3px;border-radius:50%;background:rgba(245,158,11,0.5)"></div>
-              <div style="position:absolute;top:20px;right:24px;width:4px;height:4px;border-radius:50%;background:rgba(245,158,11,0.4)"></div>
-              <div style="position:absolute;bottom:20px;left:30px;width:3px;height:3px;border-radius:50%;background:rgba(245,158,11,0.4)"></div>
-              <!-- large quote glyph -->
-              <div style="position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-family:Georgia,serif;font-size:100px;line-height:1;color:rgba(245,158,11,0.18);pointer-events:none">&ldquo;</div>
-              <div style="position:relative;z-index:1;text-align:center;padding:0 18px">
-                <div style="font-family:'Courier New',monospace;font-size:7px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(245,158,11,.6);margin-bottom:8px">Reflection</div>
-                <div style="font-family:Palatino,serif;font-style:italic;font-size:13px;line-height:1.5;color:#FFF8E7">The light is not at the end of the tunnel. You carry it with you.</div>
-                <div style="font-family:Palatino,serif;font-size:8px;color:rgba(255,248,231,.66);margin-top:9px">— Glintmark</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- panel sheet -->
-          <div style="flex:1;background:#1C2333;border-radius:14px 14px 0 0;margin-top:8px;padding:6px 12px 0;overflow:hidden">
-            <div style="display:flex;justify-content:center;padding:6px 0 5px"><div style="width:24px;height:3px;border-radius:2px;background:rgba(255,255,255,.25)"></div></div>
-
-            <div style="font-size:7px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#8A9BB0;margin-bottom:6px">Aspect ratio</div>
-            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:12px">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:7px 0;border-radius:7px;background:#252D3D;border:1px solid #F59E0B"><div style="width:11px;height:11px;border:1.4px solid #F59E0B;border-radius:2px"></div><span style="font-size:7px;color:#F59E0B;font-weight:600">1:1</span></div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:7px 0;border-radius:7px;background:#252D3D;border:1px solid rgba(255,255,255,.07)"><div style="width:9px;height:11px;border:1.4px solid #8A9BB0;border-radius:2px"></div><span style="font-size:7px;color:#8A9BB0;font-weight:600">4:5</span></div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:7px 0;border-radius:7px;background:#252D3D;border:1px solid rgba(255,255,255,.07)"><div style="width:6px;height:11px;border:1.4px solid #8A9BB0;border-radius:2px"></div><span style="font-size:7px;color:#8A9BB0;font-weight:600">9:16</span></div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:7px 0;border-radius:7px;background:#252D3D;border:1px solid rgba(255,255,255,.07)"><div style="width:12px;height:8px;border:1.4px solid #8A9BB0;border-radius:2px"></div><span style="font-size:7px;color:#8A9BB0;font-weight:600">16:9</span></div>
-            </div>
-
-            <div style="font-size:7px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#8A9BB0;margin-bottom:5px">Quote</div>
-            <div style="background:#252D3D;border:1px solid #F59E0B;border-radius:7px;padding:8px 9px;color:#F0F4F8;font-size:10px;line-height:1.55;margin-bottom:10px">The light is not at the end of the tunnel. You carry it with you.</div>
-
-            <div style="font-size:7px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#8A9BB0;margin-bottom:5px">Attribution</div>
-            <div style="background:#252D3D;border:1px solid rgba(255,255,255,.07);border-radius:7px;padding:8px 9px;color:#F0F4F8;font-size:10px">Glintmark</div>
-          </div>
-
-          <!-- dock -->
-          <div style="display:flex;border-top:1px solid rgba(255,255,255,.06);padding:6px 4px 18px;background:rgba(28,35,51,.95)">
-            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:3px 0"><svg width="15" height="15" viewBox="0 0 22 22" fill="none" stroke="#F59E0B" stroke-width="1.7" stroke-linecap="round"><path d="M4 6h14M4 11h14M4 16h9"/></svg><span style="font-size:7px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#F59E0B">Quote</span></div>
-            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:3px 0"><svg width="15" height="15" viewBox="0 0 22 22" fill="none" stroke="#4A5568" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><rect x="3" y="4" width="16" height="14" rx="2.5"/><circle cx="8" cy="9" r="1.6"/><path d="M3.5 15l4.5-4 3 2.5L15 9l3.5 4"/></svg><span style="font-size:7px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#4A5568">BG</span></div>
-            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:3px 0"><span style="font-family:Georgia,serif;font-size:13px;font-weight:600;color:#4A5568;height:15px;line-height:15px">Aa</span><span style="font-size:7px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#4A5568">Style</span></div>
-            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:3px 0"><svg width="15" height="15" viewBox="0 0 22 22" fill="none" stroke="#4A5568" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3v11M6.5 7.5L11 3l4.5 4.5M4 14v3a2 2 0 002 2h10a2 2 0 002-2v-3"/></svg><span style="font-size:7px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#4A5568">Export</span></div>
-          </div>
-
-          <div style="position:absolute;bottom:5px;left:50%;transform:translateX(-50%);width:90px;height:3px;border-radius:2px;background:rgba(240,244,248,.25);z-index:7"></div>
-        </div>
-      </div>
-      <div class="mockup-caption">Editor</div>
     </div>
 
   </div>
-</section>
+</div>
 
-<!-- ── FEATURES ── -->
-<section class="features" id="features">
-  <div class="section-label">What it does</div>
-  <h2 class="section-title">Every word deserves a great card.</h2>
-
-  <div class="features-grid">
-    <div class="feature">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h12"/></svg>
-      </div>
-      <h3>Four named themes</h3>
-      <p>Folio, Immersive, Broadside, and Candlelight — each a distinct visual language for sharing what moves you.</p>
+<!-- HOW IT WORKS -->
+<div id="how">
+  <div style="text-align:center" class="gm-reveal">
+    <div class="section-label">How it works</div>
+    <h2 class="section-h2">Three steps from a verse<br>to something you'll keep.</h2>
+  </div>
+  <div class="how-grid">
+    <div class="how-card gm-reveal">
+      <div class="how-num">01</div>
+      <h3>Capture the words</h3>
+      <p>Type a verse, paste a quote, or use AI to parse text from anywhere. Add the reference and it's yours.</p>
     </div>
-    <div class="feature">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="3"/></svg>
-      </div>
-      <h3>Paste &amp; Parse</h3>
-      <p>Copy a quote from anywhere and let AI extract the text, attribution, and source automatically.</p>
+    <div class="how-card gm-reveal">
+      <div class="how-num">02</div>
+      <h3>Set the mood</h3>
+      <p>Choose a theme, a gradient or your own photo, and the right typeface. Every card looks considered, never templated.</p>
     </div>
-    <div class="feature">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="M3 16l5-4 4 3 3-2.5 6 5"/></svg>
-      </div>
-      <h3>Photo backgrounds</h3>
-      <p>Use your own photos or choose from curated landscape presets — mountains, coastlines, forest light.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24"><path d="M11 3v11M6.5 7.5L11 3l4.5 4.5M4 14v3a2 2 0 002 2h10a2 2 0 002-2v-3"/></svg>
-      </div>
-      <h3>Share anywhere</h3>
-      <p>Export to Instagram, Messages, or your Photos library — sized for Stories, Feed, or any format you need.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="9" height="9" rx="2"/><rect x="13" y="3" width="9" height="9" rx="2"/><rect x="2" y="13" width="9" height="9" rx="2"/><rect x="13" y="13" width="9" height="9" rx="2"/></svg>
-      </div>
-      <h3>Home screen widgets</h3>
-      <p>Pin a favorite card as a widget — your reflection of the day, right on your lock screen. <span style="color:var(--muted);font-size:13px">(Coming soon)</span></p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8L12 15l-5 3.2 1.9-5.8L4 8.8h6.1z"/></svg>
-      </div>
-      <h3>Smart cards</h3>
-      <p>Author portraits and source-specific backgrounds — curated images that match the wisdom you're sharing. <span style="color:var(--muted);font-size:13px">(Coming soon)</span></p>
+    <div class="how-card gm-reveal">
+      <div class="how-num">03</div>
+      <h3>Keep &amp; share</h3>
+      <p>Save it to your library, set it as a wallpaper, or share a crisp square anywhere. Return to it whenever you need the light.</p>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ── THEMES ── -->
-<section class="themes" id="themes">
+<!-- THEMES -->
+<div id="themes">
   <div class="themes-inner">
-    <div class="section-label">Card themes</div>
-    <h2 class="section-title">A style for every voice.</h2>
-
+    <div style="text-align:center" class="gm-reveal">
+      <div class="section-label">Four card styles</div>
+      <h2 class="section-h2">A look for every line.</h2>
+      <p style="font-family:Georgia,serif;font-size:18px;line-height:1.6;color:#B7BECB;margin-top:16px;max-width:520px;margin-left:auto;margin-right:auto">Same words, four typographic treatments. Pick the one that matches the moment.</p>
+    </div>
     <div class="themes-grid">
 
       <!-- Folio -->
-      <div>
-        <div class="theme-label-wrap">
-          <div class="theme-name">Folio</div>
-          <div class="theme-desc">left rule · serif column · warmth panel</div>
-        </div>
-        <div class="theme-card" style="background:#0D1117;">
-          <div style="position:absolute;right:0;top:0;bottom:0;width:40%;background:radial-gradient(120% 90% at 118% 50%,rgba(245,158,11,0.20),rgba(245,158,11,0.05) 48%,transparent 72%)"></div>
-          <div style="position:absolute;right:0;top:0;bottom:0;width:40%;background:repeating-linear-gradient(180deg,rgba(255,248,231,0.035) 0px,rgba(255,248,231,0.035) 1px,transparent 1px,transparent 22px)"></div>
-          <div style="position:absolute;left:0;top:0;bottom:0;width:5px;background:#F59E0B"></div>
-          <div style="position:absolute;left:0;top:0;bottom:0;width:62%;display:flex;flex-direction:column;justify-content:center;padding:32px 20px 32px 32px">
-            <div style="font-family:'Courier New',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#F59E0B;margin-bottom:16px">Reflection</div>
-            <div style="font-family:Georgia,serif;font-size:20px;line-height:1.45;color:#FFF8E7">The light is not at the end of the tunnel. You carry it with you.</div>
-            <div style="font-family:Georgia,serif;font-style:italic;font-size:11px;color:rgba(255,248,231,0.62);margin-top:18px">— Glintmark</div>
+      <div class="gm-reveal gm-theme">
+        <div class="theme-card-img" style="background:#0D1117;">
+          <div style="position:absolute;right:0;top:0;bottom:0;width:40%;background:radial-gradient(120% 90% at 118% 50%,rgba(245,158,11,.20),transparent 72%)"></div>
+          <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#F59E0B"></div>
+          <div style="position:absolute;left:0;top:0;width:64%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:0 14px 0 22px">
+            <div style="font-family:'Courier New',monospace;font-size:7px;letter-spacing:2.5px;text-transform:uppercase;color:#F59E0B;margin-bottom:12px">Reflection</div>
+            <div style="font-family:Georgia,serif;font-size:15px;line-height:1.4;color:#FFF8E7">The light is not at the end of the tunnel. You carry it with you.</div>
           </div>
-          <div style="position:absolute;bottom:14px;right:16px;font-family:'Courier New',monospace;font-size:8px;color:rgba(245,158,11,0.55)">@glintmark</div>
         </div>
+        <div class="theme-name">Folio</div>
+        <div class="theme-desc">Serif column, warm panel</div>
       </div>
 
       <!-- Immersive -->
-      <div>
-        <div class="theme-label-wrap">
-          <div class="theme-name">Immersive</div>
-          <div class="theme-desc">text-dominant · vignette · gold on dark</div>
-        </div>
-        <div class="theme-card" style="background:radial-gradient(130% 110% at 50% 42%,#141B22,#0D1117 70%);">
-          <div style="position:absolute;inset:0;box-shadow:inset 0 0 100px 36px rgba(0,0,0,0.78)"></div>
-          <div style="position:absolute;inset:0;background:radial-gradient(ellipse 78% 70% at 50% 50%,transparent 38%,rgba(0,0,0,0.5) 100%)"></div>
-          <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 36px">
-            <div style="font-family:'Courier New',monospace;font-size:7px;letter-spacing:3.5px;text-transform:uppercase;color:rgba(245,158,11,0.55);margin-bottom:20px">Reflection</div>
-            <div style="font-family:Georgia,serif;font-size:28px;line-height:1.35;color:#FFD700">The light is not at the end of the tunnel. You carry it with you.</div>
-            <div style="font-family:Georgia,serif;font-style:italic;font-size:12px;color:rgba(255,248,231,0.7);margin-top:20px">— Glintmark</div>
+      <div class="gm-reveal gm-theme">
+        <div class="theme-card-img" style="background:radial-gradient(130% 110% at 50% 42%,#141B22,#0D1117 70%);">
+          <div style="position:absolute;inset:0;box-shadow:inset 0 0 90px 30px rgba(0,0,0,.78)"></div>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 22px">
+            <div style="font-family:Georgia,serif;font-size:20px;line-height:1.3;color:#FFD700;letter-spacing:-.3px">The light is not at the end of the tunnel.</div>
           </div>
-          <div style="position:absolute;bottom:14px;left:18px;font-family:'Courier New',monospace;font-size:8px;color:rgba(245,158,11,0.5)">@glintmark</div>
         </div>
+        <div class="theme-name">Immersive</div>
+        <div class="theme-desc">Gold on dark, vignette</div>
       </div>
 
       <!-- Broadside -->
-      <div>
-        <div class="theme-label-wrap">
-          <div class="theme-name">Broadside</div>
-          <div class="theme-desc">all-caps · heavy sans · headline weight</div>
-        </div>
-        <div class="theme-card" style="background:#0D1117;">
-          <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:32px 28px">
-            <div style="font-family:system-ui,sans-serif;font-weight:800;font-size:33px;line-height:1.05;letter-spacing:-0.8px;text-transform:uppercase;color:#FFF">The light is not at the end of the <span style="color:#F59E0B">tunnel.</span> You carry it with you.</div>
+      <div class="gm-reveal gm-theme">
+        <div class="theme-card-img" style="background:#0D1117;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 20px">
+            <div style="font-weight:800;font-size:25px;line-height:1.0;letter-spacing:-.8px;text-transform:uppercase;color:#fff">The light is not at the <span style="color:#F59E0B">end.</span></div>
           </div>
-          <div style="position:absolute;left:28px;bottom:26px;font-family:system-ui,sans-serif;font-weight:700;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#F59E0B">— Glintmark</div>
-          <div style="position:absolute;bottom:26px;right:28px;font-family:'Courier New',monospace;font-size:8px;color:rgba(245,158,11,0.5)">@glintmark</div>
         </div>
+        <div class="theme-name">Broadside</div>
+        <div class="theme-desc">All-caps, headline weight</div>
       </div>
 
       <!-- Candlelight -->
-      <div>
-        <div class="theme-label-wrap">
-          <div class="theme-name">Candlelight</div>
-          <div class="theme-desc">quote glyph · italic Palatino · stars</div>
-        </div>
-        <div class="theme-card" style="background:linear-gradient(158deg,#2B3344 0%,#1D2533 52%,#161D2A 100%);">
-          <div style="position:absolute;top:42px;left:52px;width:3px;height:3px;border-radius:50%;background:rgba(245,158,11,0.5)"></div>
-          <div style="position:absolute;top:73px;right:64px;width:4px;height:4px;border-radius:50%;background:rgba(245,158,11,0.4)"></div>
-          <div style="position:absolute;bottom:100px;left:40px;width:3px;height:3px;border-radius:50%;background:rgba(245,158,11,0.45)"></div>
-          <div style="position:absolute;bottom:64px;right:40px;width:3px;height:3px;border-radius:50%;background:rgba(245,158,11,0.4)"></div>
-          <div style="position:absolute;top:-32px;left:50%;transform:translateX(-50%);font-family:Georgia,serif;font-size:155px;line-height:1;color:rgba(245,158,11,0.18);pointer-events:none">&ldquo;</div>
-          <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:64px 36px 36px">
-            <div style="font-family:'Courier New',monospace;font-size:7px;letter-spacing:3.5px;text-transform:uppercase;color:rgba(245,158,11,0.6);margin-bottom:16px">Reflection</div>
-            <div style="font-family:Palatino,'Palatino Linotype',serif;font-style:italic;font-size:21px;line-height:1.55;color:#FFF8E7">The light is not at the end of the tunnel. You carry it with you.</div>
-            <div style="font-family:Palatino,serif;font-size:11px;color:rgba(255,248,231,0.66);margin-top:18px">— Glintmark</div>
+      <div class="gm-reveal gm-theme">
+        <div class="theme-card-img" style="background:linear-gradient(158deg,#2B3344,#1D2533 52%,#161D2A);">
+          <div style="position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-family:Georgia,serif;font-size:110px;line-height:1;color:rgba(245,158,11,.2)">&ldquo;</div>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:38px 22px 18px">
+            <div style="font-family:Palatino,'Book Antiqua',serif;font-style:italic;font-size:16px;line-height:1.5;color:#FFF8E7">The light is not at the end of the tunnel.</div>
           </div>
-          <div style="position:absolute;bottom:14px;right:16px;font-family:'Courier New',monospace;font-size:8px;color:rgba(245,158,11,0.5)">@glintmark</div>
         </div>
+        <div class="theme-name">Candlelight</div>
+        <div class="theme-desc">Quote glyph, dusk &amp; italic</div>
       </div>
 
     </div>
   </div>
-</section>
+</div>
 
-<!-- ── NOTIFY ── -->
-<section class="notify-section">
-  <div class="notify-badge">
-    <div class="notify-dot"></div>
-    In development
+<!-- FEATURED QUOTES (cream) -->
+<div id="quotes">
+  <div class="quotes-inner">
+    <div class="gm-reveal">
+      <div class="quotes-label">A library that grows with you</div>
+      <h2 class="quotes-h2">The words that find you at the right moment — kept somewhere you'll see them again.</h2>
+    </div>
+    <div class="quotes-grid">
+      <div class="quote-card gm-reveal">
+        <div class="quote-glyph">&ldquo;</div>
+        <div class="quote-text">Thy word is a lamp unto my feet, and a light unto my path.</div>
+        <div class="quote-attrib">Psalm 119:105</div>
+      </div>
+      <div class="quote-card gm-reveal">
+        <div class="quote-glyph">&ldquo;</div>
+        <div class="quote-text">Lead, kindly Light, amid th'encircling gloom — lead Thou me on.</div>
+        <div class="quote-attrib">John Henry Newman</div>
+      </div>
+      <div class="quote-card gm-reveal">
+        <div class="quote-glyph">&ldquo;</div>
+        <div class="quote-text">The glory of God is intelligence — in other words, light and truth.</div>
+        <div class="quote-attrib">Doctrine &amp; Covenants 93:36</div>
+      </div>
+    </div>
   </div>
-  <h2>Coming to the App Store.</h2>
-  <p>Glintmark is in active development. It will be available on iPhone when it's ready — built carefully, not rushed.</p>
-</section>
+</div>
 
-<!-- ── FOOTER ── -->
-<footer>
-  <div class="footer-logo">
-    <div class="footer-diamond"></div>
-    <span class="footer-brand">Glintmark</span>
+<!-- DOWNLOAD CTA -->
+<div id="download">
+  <div class="cta-inner">
+    <div class="gm-reveal">
+      <div class="cta-diamond"></div>
+      <h2 class="cta-h2">Your light, in your pocket.</h2>
+      <p class="cta-sub">Coming soon to the App Store. Make your first card in under a minute.</p>
+      <div class="cta-btn-wrap">
+        <a href="#" class="btn-store-lg gm-as">
+          <svg width="22" height="25" viewBox="0 0 17 20" fill="#fff"><path d="M14.1 10.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.9-.8-3.1-.8-1.6 0-3 .9-3.8 2.4-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.4-1-2.4-3.7zM11.8 3.8c.6-.8 1.1-1.9.9-3-1 0-2.1.6-2.8 1.4-.6.7-1.1 1.8-1 2.9 1.1.1 2.2-.5 2.9-1.3z"/></svg>
+          <div>
+            <small>Download on the</small>
+            <strong>App Store</strong>
+          </div>
+        </a>
+      </div>
+    </div>
   </div>
-  <div class="footer-links">
-    <a href="privacy/">Privacy Policy</a>
-    <a href="support/">Support</a>
-  </div>
-  <div class="footer-copy">&copy; 2026 HZHLLC</div>
-</footer>
+</div>
 
+<!-- FOOTER -->
+<div id="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div class="footer-diamond"></div>
+      <span class="footer-name">Glintmark</span>
+    </div>
+    <div class="footer-links">
+      <a href="#how" class="gm-nav-link">Features</a>
+      <a href="support/" class="gm-nav-link">Support</a>
+      <a href="privacy/" class="gm-nav-link">Privacy</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 HZHLLC</div>
+  </div>
+</div>
+
+<script>
+  const reveal = () => {
+    const vh = window.innerHeight || 800;
+    document.querySelectorAll('.gm-reveal').forEach(el => {
+      if (!el.classList.contains('in') && el.getBoundingClientRect().top < vh * 0.92)
+        el.classList.add('in');
+    });
+  };
+  reveal();
+  window.addEventListener('scroll', reveal, { passive: true });
+  window.addEventListener('resize', reveal);
+  setTimeout(() => document.querySelectorAll('.gm-reveal').forEach(el => el.classList.add('in')), 1600);
+</script>
 </body>
 </html>
