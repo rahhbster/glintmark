@@ -166,6 +166,42 @@
   .how-card h3 { font-size: 22px; font-weight: 600; color: #FFF8E7; margin-top: 18px; letter-spacing: -.3px; }
   .how-card p { font-size: 15.5px; line-height: 1.62; color: #8A9BB0; margin-top: 12px; }
 
+  /* ── SCREENSHOTS ── */
+  #screenshots {
+    background: #07090C;
+    border-top: 1px solid rgba(255,255,255,.05);
+    padding: 104px 0;
+  }
+  .screenshots-header { max-width: 1200px; margin: 0 auto; padding: 0 32px 56px; text-align: center; }
+  .screenshots-track {
+    display: flex; gap: 20px;
+    padding: 0 32px 8px;
+    width: max-content;
+    overflow-x: visible;
+  }
+  .screenshots-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+  }
+  .screenshots-scroll::-webkit-scrollbar { display: none; }
+  .screenshot-frame { scroll-snap-align: start; flex-shrink: 0; width: 220px; }
+  .screenshot-frame img {
+    width: 220px; border-radius: 22px;
+    box-shadow: 0 24px 56px rgba(0,0,0,.6);
+    display: block;
+  }
+  .screenshot-frame p {
+    font-family: Georgia, serif; font-size: 14px;
+    color: #B7BECB; line-height: 1.4; margin-top: 14px;
+  }
+  .screenshots-hint {
+    text-align: center; margin-top: 28px;
+    font-size: 12px; letter-spacing: 2px;
+    color: rgba(255,255,255,.25); text-transform: uppercase;
+  }
+
   /* ── THEMES ── */
   #themes {
     background:
@@ -436,6 +472,39 @@
       <p>Save it to your library, set it as a wallpaper, or share a crisp square anywhere. Return to it whenever you need the light.</p>
     </div>
   </div>
+</div>
+
+<!-- SCREENSHOTS -->
+<div id="screenshots">
+  <div class="screenshots-header gm-reveal">
+    <div class="section-label">Inside the app</div>
+    <h2 class="section-h2">Every screen, considered.</h2>
+  </div>
+  <div class="screenshots-scroll">
+    <div class="screenshots-track">
+      <div class="screenshot-frame gm-reveal">
+        <img src="screenshots/01-library.png" alt="Glintmark library — Turn a few words into art" loading="lazy">
+        <p>Turn a few words into art.</p>
+      </div>
+      <div class="screenshot-frame gm-reveal">
+        <img src="screenshots/02-smart-card.png" alt="Smart Card detection — It knows what you're quoting" loading="lazy">
+        <p>It knows what you're quoting.</p>
+      </div>
+      <div class="screenshot-frame gm-reveal">
+        <img src="screenshots/03-editor.png" alt="Card editor — Make it unmistakably you" loading="lazy">
+        <p>Make it unmistakably you.</p>
+      </div>
+      <div class="screenshot-frame gm-reveal">
+        <img src="screenshots/04-palette.png" alt="Palette picker — A color for every mood" loading="lazy">
+        <p>A color for every mood.</p>
+      </div>
+      <div class="screenshot-frame gm-reveal">
+        <img src="screenshots/05-share.png" alt="Share everywhere — Share it everywhere" loading="lazy">
+        <p>Share it everywhere.</p>
+      </div>
+    </div>
+  </div>
+  <p class="screenshots-hint">scroll to explore</p>
 </div>
 
 <!-- THEMES -->
