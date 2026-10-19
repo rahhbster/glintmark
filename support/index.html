@@ -30,6 +30,8 @@ a { color: var(--amber); text-decoration: none; }
 a:hover { text-decoration: underline; }
 hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
 </style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 <body>
 <div class="container">
@@ -45,28 +47,33 @@ hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
   <p class="subtitle">We're here to help. Glintmark is in active development — your feedback shapes the app.</p>
 
   <h2>Getting started</h2>
-  <p>Glintmark is not yet available on the App Store. It is currently in development. When it launches, you will be able to create quote cards, paste text from any source, apply a visual theme, and share to Instagram or anywhere else.</p>
+  <p>Create quote cards, paste text from any source, choose a layout, and share to Instagram or anywhere else.</p>
 
   <div class="faq">
 
     <div class="faq-item">
       <div class="faq-q">When will Glintmark be available?</div>
-      <div class="faq-a">We are targeting a TestFlight beta followed by an App Store release. We do not have a firm date. Follow <a href="https://glintmark.app">glintmark.app</a> for updates.</div>
+      <div class="faq-a">Glintmark is coming to the App Store for iPhone. Follow <a href="https://glintmark.app">glintmark.app</a> for updates.</div>
     </div>
 
     <div class="faq-item">
       <div class="faq-q">What is Paste &amp; Parse?</div>
-      <div class="faq-a">Copy any quote, verse, or passage, then tap "Paste &amp; Parse" in the editor. Glintmark uses AI to automatically extract the quote body, attribution, and source so you don't have to type them separately. This feature is optional and requires an OpenRouter API key in Settings.</div>
+      <div class="faq-a">Copy any quote, verse, or passage, then tap "Paste &amp; Parse" in the editor. Glintmark uses AI to automatically extract the quote body, attribution, and source so you don't have to type them separately. The first time, Glintmark asks before sending your text to the AI service. Tap Allow to use AI, or Don't Allow to parse on your device only. It works with no setup and includes 5 AI parses a day. After that, or if the AI service can't be reached, Glintmark fills in what it can on your device. Your own OpenRouter key in Settings removes the daily limit.</div>
     </div>
 
     <div class="faq-item">
       <div class="faq-q">Does Glintmark collect my data?</div>
-      <div class="faq-a">No. Cards are stored locally on your device and never uploaded to our servers. The only data that leaves your device is the text you paste when using Paste &amp; Parse — that text is sent to the AI parsing service. See our <a href="../privacy/">Privacy Policy</a> for full details.</div>
+      <div class="faq-a">No. Cards are stored locally on your device and never uploaded to our servers. The only text that leaves your device is quote text you've allowed Glintmark to read with AI, from Paste &amp; Parse or the share extension. That text is sent to the AI parsing service and isn't stored by us. The app also downloads a list of authors and, for Portrait cards, author images. See our <a href="../privacy/">Privacy Policy</a> for full details.</div>
     </div>
 
     <div class="faq-item">
-      <div class="faq-q">Why does the app need an OpenRouter API key?</div>
-      <div class="faq-a">The AI quote parser calls the OpenRouter API to process text. Rather than billing you through the app, we let you use your own API key so you control usage and cost. You can get a free key at openrouter.ai. The Paste &amp; Parse feature works without a key — it falls back to a simpler local parser.</div>
+      <div class="faq-q">How do I turn AI parsing off?</div>
+      <div class="faq-a">Open Settings in Glintmark (the gear in the library) and turn off "Use AI to read quotes." Paste &amp; Parse and the share extension then parse text on your device only, and nothing you paste leaves your phone. Turn it back on any time.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Do I need an OpenRouter API key?</div>
+      <div class="faq-a">No. Paste &amp; Parse works without one. If you parse a lot, add your own key in Settings to remove the daily limit. Your text then goes straight from your device to OpenRouter and is billed to your account (well under $0.001 per parse). Free keys are available at openrouter.ai.</div>
     </div>
 
     <div class="faq-item">
@@ -76,7 +83,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
 
     <div class="faq-item">
       <div class="faq-q">Can I use my own photos?</div>
-      <div class="faq-a">Yes. In the background panel, tap "Upload" to select a photo from your library. Glintmark will ask for read access to your Photos. The image is used locally only — it is never uploaded.</div>
+      <div class="faq-a">Yes. In the background panel, tap Upload, then Choose Photo. The iOS photo picker gives Glintmark only the photo you pick, not your whole library. The image stays on your device and is never uploaded.</div>
     </div>
 
   </div>

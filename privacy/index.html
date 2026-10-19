@@ -98,6 +98,8 @@
   }
   .contact-box h2 { margin-top: 0; }
 </style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 <body>
 <div class="container">
@@ -106,7 +108,7 @@
   <span class="wordmark">Glintmark</span>
 
   <h1>Privacy Policy</h1>
-  <p class="effective">Effective date: June 22, 2026</p>
+  <p class="effective">Effective date: October 18, 2026</p>
 
   <div class="highlight">
     The short version: Glintmark does not collect your personal information, does not track you, and does not sell data. Your cards live on your device.
@@ -128,27 +130,36 @@
   <p>All cards you create — including text, background choices, and style settings — are stored locally on your device using iOS standard storage. They are never uploaded to a server or synchronized to any cloud service by Glintmark.</p>
   <p>If you have iCloud Backup enabled in iOS Settings, your device backups (which may include Glintmark data) are governed by Apple's privacy policy, not ours.</p>
 
-  <h2>Photos and camera</h2>
-  <p>If you choose to use a photo from your library as a card background, Glintmark requests read access to your Photos library. This image is loaded directly onto your card and stored locally on your device. It is never uploaded anywhere.</p>
-  <p>You can revoke photo access at any time in iOS Settings → Privacy & Security → Photos.</p>
+  <h2>Photos</h2>
+  <p>To use your own photo as a background, Glintmark uses the iOS photo picker, which gives the app only the photo you pick, not access to your library. The photo is stored with your card on your device and is never uploaded.</p>
+  <p>When you tap Save to Photos, Glintmark asks for add-only access so it can save the card image. It cannot see your existing photos. You can change this any time in iOS Settings → Privacy &amp; Security → Photos → Glintmark.</p>
 
-  <h2>The AI quote parser (optional feature)</h2>
-  <p>Glintmark includes an optional "Paste & Parse" feature that uses an external AI service (<a href="https://openrouter.ai" target="_blank" rel="noopener">OpenRouter</a>) to extract quote text, attribution, and source from clipboard content you paste.</p>
-  <p>When you use this feature:</p>
+  <h2>The AI quote parser</h2>
+  <p>Glintmark can use an AI service to pull the quote text, attribution, and source out of text you paste or share into the app. It runs in two cases:</p>
   <ul>
-    <li>The text you paste is sent to OpenRouter's API to be parsed.</li>
-    <li>No other information is sent — not your name, device ID, location, or any personal identifier.</li>
-    <li>OpenRouter's handling of API requests is governed by <a href="https://openrouter.ai/privacy" target="_blank" rel="noopener">their privacy policy</a>.</li>
-    <li>This feature requires you to provide your own OpenRouter API key in Settings. We never see or store your API key on our servers.</li>
+    <li>When you tap Paste &amp; Parse, if you have allowed AI parsing. The first time, Glintmark asks “Use AI to read this quote?”. If you choose Don't Allow, the text is parsed on your device only. Without your own key, Glintmark includes 5 AI parses a day; after that, or if the service can't be reached, the text is parsed on your device.</li>
+    <li>When you share text into Glintmark from another app and the app can't recognize the quote on its own, but only if you have already allowed AI parsing in the app. You can turn it off in Settings → “Use AI to read quotes”.</li>
   </ul>
-  <p>If you prefer not to use this feature, you can type your quotes manually. The parser is never invoked automatically.</p>
+  <p>When it runs:</p>
+  <ul>
+    <li>By default, the text is sent to our server (glintmark-api.vercel.app), which forwards it to <a href="https://openrouter.ai" target="_blank" rel="noopener">OpenRouter</a> to be parsed and returns the result. Our server is hosted by Vercel. It does not store the text; it logs only technical details of each request (text length, response status, model and timing). Like any web host, Vercel receives your device's IP address and may keep it briefly in request logs, under <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">Vercel's privacy policy</a>.</li>
+    <li>If you enter your own OpenRouter API key in Settings, the text goes directly from your device to OpenRouter instead, and never reaches our server. Your key is stored in your device's Keychain and is sent only to OpenRouter. Parses then bill your OpenRouter account: a free model is tried first, with a low-cost paid model as fallback (well under $0.001 per parse).</li>
+    <li>Only the text is sent, along with the standard technical details any app request includes — not your name, location, cards, or any other personal identifier.</li>
+    <li>OpenRouter passes the text to an AI model provider it selects, which may include free models. Some providers may keep inputs or use them to improve their models.</li>
+    <li>OpenRouter's handling of requests is governed by <a href="https://openrouter.ai/privacy" target="_blank" rel="noopener">their privacy policy</a>.</li>
+  </ul>
+  <p>To keep all text on your device, turn off Settings → “Use AI to read quotes”. Paste &amp; Parse and the share extension then parse on your device only. You can turn it back on any time.</p>
 
   <h2>Card sharing and export</h2>
   <p>When you export or share a card, Glintmark renders it as an image file and hands it to iOS's standard share sheet. Where that image goes — whether to Instagram, Messages, Photos, or anywhere else — is your choice and governed by those platforms' policies, not ours.</p>
 
   <h2>Third-party services</h2>
   <p>Beyond the optional AI parser described above, Glintmark does not integrate any third-party analytics, advertising, or data collection services.</p>
-  <p>Background photos in the app are loaded from <a href="https://picsum.photos" target="_blank" rel="noopener">picsum.photos</a>, a free image service. When the app loads a background photo, your device makes a standard network request to their servers. We do not control or have access to their server logs.</p>
+  <p>Background photos are bundled inside the app and stay on your device. Choosing or exporting one makes no network request. The photos come from <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a>; the photographer credit links in Settings open Unsplash in your browser only if you tap them.</p>
+  <p>When the app starts, it downloads a list of authors that have portrait cards from our own server (glintmark-api.vercel.app). If a card uses the Portrait theme, the app downloads that author's portrait image from Wikipedia (en.wikipedia.org, which serves the file from Wikimedia) when you open or export the card. These are standard network requests; we do not control or have access to Wikipedia's server logs.</p>
+
+  <h2>Retention and deletion</h2>
+  <p>We keep no copy of your cards or of text sent for parsing. Our server's request logs contain no quote text. Your cards, photos and settings stay on your device until you delete them: delete a card from the library, or delete the app. To remove your OpenRouter key, clear it in Settings; iOS can keep Keychain items after an app is deleted. We hold no account or personal data, so there is nothing for us to delete on request, but you can write to <a href="mailto:privacy@glintmark.app">privacy@glintmark.app</a> with any question.</p>
 
   <h2>Children's privacy</h2>
   <p>Glintmark does not knowingly collect any information from children under 13. If you believe a child has provided personal information through the app, please contact us and we will address it promptly.</p>
