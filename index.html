@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Glintmark — Carry the light with you</title>
-<meta name="description" content="Turn the verses and words that move you into cards worth keeping. Beautiful quote cards for iPhone — coming soon to the App Store.">
+<meta name="description" content="Turn the verses and words that move you into cards worth keeping. Beautiful quote cards for iPhone — free on the App Store.">
+<meta name="apple-itunes-app" content="app-id=6822783323">
 <meta property="og:title" content="Glintmark">
 <meta property="og:description" content="Turn the verses and words that move you into cards worth keeping.">
 <meta property="og:url" content="https://glintmark.app/">
@@ -117,15 +118,10 @@
     font-size: 20px; line-height: 1.6;
     color: #B7BECB; margin-top: 26px; max-width: 468px;
   }
-  .hero-actions { display: flex; align-items: center; gap: 16px; margin-top: 40px; }
-  .btn-store {
-    display: flex; align-items: center; gap: 11px;
-    background: #000; border: 1px solid rgba(255,255,255,.14);
-    color: #fff; padding: 13px 22px; border-radius: 13px;
-  }
-  .btn-store-text { text-align: left; line-height: 1.1; }
-  .btn-store-text small { font-size: 9px; letter-spacing: .5px; color: #B7BECB; display: block; }
-  .btn-store-text strong { font-size: 17px; font-weight: 600; letter-spacing: .2px; }
+  .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 40px; }
+  .store-badge { display: inline-block; line-height: 0; border-radius: 9px; }
+  .store-badge img { display: block; height: auto; }
+  .store-badge:focus-visible { outline: 2px solid #F59E0B; outline-offset: 3px; }
   .btn-ghost {
     padding: 14px 24px; border-radius: 13px;
     border: 1px solid rgba(255,255,255,.16);
@@ -288,13 +284,8 @@
     max-width: 520px; margin-left: auto; margin-right: auto;
   }
   .cta-btn-wrap { display: flex; justify-content: center; margin-top: 38px; }
-  .btn-store-lg {
-    display: flex; align-items: center; gap: 12px;
-    background: #000; border: 1px solid rgba(255,255,255,.14);
-    color: #fff; padding: 15px 26px; border-radius: 14px;
-  }
-  .btn-store-lg small { font-size: 10px; letter-spacing: .5px; color: #B7BECB; display: block; }
-  .btn-store-lg strong { font-size: 19px; font-weight: 600; letter-spacing: .2px; }
+  .cta-note { font-size: 14px; line-height: 1.7; color: #8A9BB0; margin-top: 26px; }
+  .cta-note a { color: #E0C089; text-decoration: underline; text-underline-offset: 3px; }
 
   /* ── FOOTER ── */
   #footer {
@@ -352,8 +343,7 @@
       <a href="#how" class="gm-nav-link hide-sm">Features</a>
       <a href="support/" class="gm-nav-link hide-sm">Support</a>
       <a href="privacy/" class="gm-nav-link hide-sm">Privacy</a>
-      <a href="#download" class="nav-cta gm-as">
-        <svg width="14" height="16" viewBox="0 0 17 20" fill="#1A1206"><path d="M14.1 10.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.9-.8-3.1-.8-1.6 0-3 .9-3.8 2.4-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.4-1-2.4-3.7zM11.8 3.8c.6-.8 1.1-1.9.9-3-1 0-2.1.6-2.8 1.4-.6.7-1.1 1.8-1 2.9 1.1.1 2.2-.5 2.9-1.3z"/></svg>
+      <a href="https://apps.apple.com/app/apple-store/id6822783323?pt=129166924&amp;ct=web&amp;mt=8" class="nav-cta gm-as">
         Get the app
       </a>
     </div>
@@ -369,12 +359,8 @@
       <h1 class="hero-h1">Carry the light<br>with you.</h1>
       <p class="hero-sub">Turn the verses and words that move you into cards worth keeping. Set them, share them, return to them — a quiet place for the lines that light your way.</p>
       <div class="hero-actions">
-        <a href="#download" class="btn-store gm-as">
-          <svg width="20" height="23" viewBox="0 0 17 20" fill="#fff"><path d="M14.1 10.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.9-.8-3.1-.8-1.6 0-3 .9-3.8 2.4-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.4-1-2.4-3.7zM11.8 3.8c.6-.8 1.1-1.9.9-3-1 0-2.1.6-2.8 1.4-.6.7-1.1 1.8-1 2.9 1.1.1 2.2-.5 2.9-1.3z"/></svg>
-          <div class="btn-store-text">
-            <small>Download on the</small>
-            <strong>App Store</strong>
-          </div>
+        <a href="https://apps.apple.com/app/apple-store/id6822783323?pt=129166924&amp;ct=web&amp;mt=8" class="store-badge">
+          <img src="app-store-badge.svg" alt="Download on the App Store" width="162" height="54">
         </a>
         <a href="#how" class="btn-ghost gm-ghost">See features</a>
       </div>
@@ -424,7 +410,7 @@
               <div style="break-inside:avoid;margin-bottom:12px;border-radius:12px;overflow:hidden;position:relative;min-height:188px;display:flex;flex-direction:column;justify-content:center;padding:18px 16px;background:linear-gradient(150deg,#2C3E50,#3498DB)">
                 <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.4))"></div>
                 <div style="position:relative;z-index:1;text-align:left">
-                  <div style="font-size:15px;line-height:1.5;color:#FFF;font-weight:500">You have power over your mind — not outside events.</div>
+                  <div style="font-size:15px;line-height:1.5;color:#FFF;font-weight:500">While thou livest, while it is in thy power, be good.</div>
                   <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:11px">Marcus Aurelius</div>
                 </div>
               </div>
@@ -599,7 +585,7 @@
       </div>
       <div class="quote-card gm-reveal">
         <div class="quote-glyph">&ldquo;</div>
-        <div class="quote-text">The glory of God is intelligence — in other words, light and truth.</div>
+        <div class="quote-text">The glory of God is intelligence, or, in other words, light and truth.</div>
         <div class="quote-attrib">Doctrine &amp; Covenants 93:36</div>
       </div>
     </div>
@@ -612,16 +598,13 @@
     <div class="gm-reveal">
       <div class="cta-diamond"></div>
       <h2 class="cta-h2">Your light, in your pocket.</h2>
-      <p class="cta-sub">Coming soon to the App Store. Make your first card in under a minute.</p>
+      <p class="cta-sub">Free on the App Store. Make your first card in under a minute.</p>
       <div class="cta-btn-wrap">
-        <a href="#" class="btn-store-lg gm-as">
-          <svg width="22" height="25" viewBox="0 0 17 20" fill="#fff"><path d="M14.1 10.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.9-.8-3.1-.8-1.6 0-3 .9-3.8 2.4-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.4-1-2.4-3.7zM11.8 3.8c.6-.8 1.1-1.9.9-3-1 0-2.1.6-2.8 1.4-.6.7-1.1 1.8-1 2.9 1.1.1 2.2-.5 2.9-1.3z"/></svg>
-          <div>
-            <small>Download on the</small>
-            <strong>App Store</strong>
-          </div>
+        <a href="https://apps.apple.com/app/apple-store/id6822783323?pt=129166924&amp;ct=web&amp;mt=8" class="store-badge">
+          <img src="app-store-badge.svg" alt="Download on the App Store" width="180" height="60">
         </a>
       </div>
+      <p class="cta-note">For news and new cards, follow <a href="https://www.instagram.com/glintmark/" target="_blank" rel="noopener">@glintmark on Instagram</a>.</p>
     </div>
   </div>
 </div>
