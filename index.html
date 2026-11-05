@@ -49,6 +49,11 @@
     transition: opacity 1s cubic-bezier(.16,.84,.44,1), transform 1s cubic-bezier(.16,.84,.44,1);
   }
   .gm-reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .gm-reveal { opacity: 1; transform: none; transition: none; }
+    .phone-float, [style*="gmPulse"] { animation: none !important; }
+    .gm-as, .gm-as:hover { transition: none; transform: none; }
+  }
 
   .gm-as { transition: transform .25s, box-shadow .25s; }
   .gm-as:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,.45); }
@@ -172,6 +177,14 @@
   .how-num { font-family: Georgia, serif; font-size: 15px; color: #F59E0B; letter-spacing: 1px; }
   .how-card h3 { font-size: 22px; font-weight: 600; color: #FFF8E7; margin-top: 18px; letter-spacing: -.3px; }
   .how-card p { font-size: 15.5px; line-height: 1.62; color: #8A9BB0; margin-top: 12px; }
+  .how-clip { width: 300px; max-width: 100%; margin: 64px auto 0; text-align: center; }
+  .how-clip video {
+    display: block; width: 100%; height: auto; aspect-ratio: 9 / 16;
+    border-radius: 22px; background: #0D1117;
+    box-shadow: 0 24px 56px rgba(0,0,0,.6);
+  }
+  .how-clip video:focus-visible { outline: 2px solid #F59E0B; outline-offset: 4px; }
+  .how-clip figcaption { font-size: 13px; color: #8A9BB0; margin-top: 14px; letter-spacing: .2px; }
 
   /* ── SCREENSHOTS ── */
   #screenshots {
@@ -207,6 +220,22 @@
     text-align: center; margin-top: 28px;
     font-size: 12px; letter-spacing: 2px;
     color: rgba(255,255,255,.25); text-transform: uppercase;
+  }
+
+  /* ── GALLERY ── */
+  #gallery { background: #07090C; padding: 104px 0; }
+  /* snap to the track's 32px gutter, not the viewport edge */
+  .gallery-scroll { scroll-padding-inline: 32px; }
+  .gallery-scroll:focus-visible { outline: 2px solid #F59E0B; outline-offset: -2px; border-radius: 4px; }
+  .gallery-frame { scroll-snap-align: start; flex-shrink: 0; width: 280px; }
+  .gallery-frame img {
+    width: 280px; height: auto; aspect-ratio: 4 / 5; border-radius: 14px;
+    box-shadow: 0 24px 56px rgba(0,0,0,.6);
+    display: block;
+  }
+  .gallery-frame figcaption {
+    font-family: Georgia, serif; font-size: 14px;
+    color: #B7BECB; line-height: 1.4; margin-top: 14px;
   }
 
   /* ── THEMES ── */
@@ -327,6 +356,8 @@
     .themes-grid { grid-template-columns: 1fr 1fr; }
     .cta-h2 { font-size: 38px; }
     .nav-cta { display: none; }
+    .how-clip { width: 270px; }
+    .gallery-frame, .gallery-frame img { width: 240px; }
   }
 </style>
 </head>
@@ -463,6 +494,10 @@
       <p>Save it to your library, put the latest one on your Home Screen with the widget, or share it in any size, from square posts to Stories. Return to it whenever you need the light.</p>
     </div>
   </div>
+  <figure class="how-clip gm-reveal">
+    <video src="media/clip-make-a-card.mp4" poster="media/clip-make-a-card-poster.jpg" width="540" height="960" controls muted playsinline loop preload="none" aria-label="Screen recording: typing an Emerson quote into Glintmark, choosing a mountain photo and the Folio layout, then opening export options."></video>
+    <figcaption>Screen recording, sped up 2.2×.</figcaption>
+  </figure>
 </div>
 
 <!-- SCREENSHOTS -->
@@ -563,6 +598,51 @@
 
     </div>
   </div>
+</div>
+
+<!-- GALLERY -->
+<div id="gallery">
+  <div class="screenshots-header gm-reveal">
+    <div class="section-label">Made in Glintmark</div>
+    <h2 class="section-h2">Real cards, made in the app.</h2>
+  </div>
+  <div class="screenshots-scroll gallery-scroll" role="region" aria-label="Cards made in Glintmark" tabindex="0">
+    <div class="screenshots-track">
+      <figure class="gallery-frame gm-reveal">
+        <img src="gallery/01-q3-broadside-dusk-480.webp" srcset="gallery/01-q3-broadside-dusk-480.webp 480w, gallery/01-q3-broadside-dusk-720.webp 720w" sizes="(max-width: 600px) 240px, 280px" alt="Quote card: &quot;The little things are rarely little to the people who remember them.&quot; Broadside layout on the Dusk gradient." width="280" height="350" loading="lazy" decoding="async">
+        <figcaption>A Glintmark original</figcaption>
+      </figure>
+      <figure class="gallery-frame gm-reveal">
+        <img src="gallery/02-emerson-480.webp" srcset="gallery/02-emerson-480.webp 480w, gallery/02-emerson-720.webp 720w" sizes="(max-width: 600px) 240px, 280px" alt="Quote card: &quot;Trust thyself: every heart vibrates to that iron string.&quot; Ralph Waldo Emerson, Self-Reliance, on a mountain photo." width="280" height="350" loading="lazy" decoding="async">
+        <figcaption>Emerson, <em>Self-Reliance</em></figcaption>
+      </figure>
+      <figure class="gallery-frame gm-reveal">
+        <img src="gallery/03-q1-broadside-dusk-480.webp" srcset="gallery/03-q1-broadside-dusk-480.webp 480w, gallery/03-q1-broadside-dusk-720.webp 720w" sizes="(max-width: 600px) 240px, 280px" alt="Quote card: &quot;Some words find us exactly when we need them.&quot; Broadside layout on the Dusk gradient." width="280" height="350" loading="lazy" decoding="async">
+        <figcaption>A Glintmark original</figcaption>
+      </figure>
+      <figure class="gallery-frame gm-reveal">
+        <img src="gallery/04-psalm-119-480.webp" srcset="gallery/04-psalm-119-480.webp 480w, gallery/04-psalm-119-720.webp 720w" sizes="(max-width: 600px) 240px, 280px" alt="Quote card: &quot;Thy word is a lamp unto my feet, and a light unto my path.&quot; Psalm 119:105, King James Version, on a night-sky photo." width="280" height="350" loading="lazy" decoding="async">
+        <figcaption>Psalm 119:105 (KJV)</figcaption>
+      </figure>
+      <figure class="gallery-frame gm-reveal">
+        <img src="gallery/05-q5-candlelight-lake-480.webp" srcset="gallery/05-q5-candlelight-lake-480.webp 480w, gallery/05-q5-candlelight-lake-720.webp 720w" sizes="(max-width: 600px) 240px, 280px" alt="Quote card: &quot;Sometimes a few words can change an entire day.&quot; Candlelight layout on a lake photo." width="280" height="350" loading="lazy" decoding="async">
+        <figcaption>A Glintmark original</figcaption>
+      </figure>
+      <figure class="gallery-frame gm-reveal">
+        <img src="gallery/06-marcus-aurelius-480.webp" srcset="gallery/06-marcus-aurelius-480.webp 480w, gallery/06-marcus-aurelius-720.webp 720w" sizes="(max-width: 600px) 240px, 280px" alt="Quote card: &quot;Do not act as if thou wert going to live ten thousand years. Death hangs over thee. While thou livest, while it is in thy power, be good.&quot; Marcus Aurelius, Meditations, in gold on a dark purple gradient." width="280" height="350" loading="lazy" decoding="async">
+        <figcaption>Marcus Aurelius, <em>Meditations</em></figcaption>
+      </figure>
+      <figure class="gallery-frame gm-reveal">
+        <img src="gallery/07-dickinson-480.webp" srcset="gallery/07-dickinson-480.webp 480w, gallery/07-dickinson-720.webp 720w" sizes="(max-width: 600px) 240px, 280px" alt="Quote card: &quot;Hope is the thing with feathers / That perches in the soul, / And sings the tune without the words, / And never stops at all…&quot; Emily Dickinson, on a golden field photo." width="280" height="350" loading="lazy" decoding="async">
+        <figcaption>Emily Dickinson (1891)</figcaption>
+      </figure>
+      <figure class="gallery-frame gm-reveal">
+        <img src="gallery/08-q4-candlelight-sunrise-480.webp" srcset="gallery/08-q4-candlelight-sunrise-480.webp 480w, gallery/08-q4-candlelight-sunrise-720.webp 720w" sizes="(max-width: 600px) 240px, 280px" alt="Quote card: &quot;A beautiful life is made of moments worth noticing.&quot; Candlelight layout on a sunrise photo." width="280" height="350" loading="lazy" decoding="async">
+        <figcaption>A Glintmark original</figcaption>
+      </figure>
+    </div>
+  </div>
+  <p class="screenshots-hint">scroll to explore</p>
 </div>
 
 <!-- FEATURED QUOTES (cream) -->
